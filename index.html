@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PRUS Component Validation — Cue, Proposition, and Domain</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="styles.css?v=20260718-component-v1" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Alternative B human validation exercise</p>
+          <h1>PRUS Component Coding</h1>
+          <p class="variant-label">Uncertainty cue → proposition → product topic domain</p>
+        </div>
+        <div class="status-pill" id="status-pill">Not started</div>
+      </header>
+
+      <section class="panel" id="home-screen">
+        <div class="callout" id="validation-pause-notice" hidden>
+          <h2>Validation temporarily paused</h2>
+          <p>
+            The validation sample is being quality-checked and rebuilt. New and resumed sessions
+            will be available after the corrected sample has been published.
+          </p>
+        </div>
+        <div class="grid two">
+          <div>
+            <h2>Start a New Session</h2>
+            <p class="muted">
+              Create a validation record before beginning the component-coding exercise. Progress
+              is retained in this browser and securely checkpointed to the research repository.
+            </p>
+            <form id="new-form" class="form-stack">
+              <label>
+                Name
+                <input type="text" name="name" autocomplete="name" required />
+              </label>
+              <label>
+                Email
+                <input type="email" name="email" autocomplete="email" required />
+              </label>
+              <label>
+                Phone number
+                <input type="tel" name="phone" autocomplete="tel" required />
+              </label>
+              <button type="submit" class="primary">New</button>
+            </form>
+          </div>
+          <div>
+            <h2>Resume a Session</h2>
+            <p class="muted">
+              Resume is available for records created in this browser. Enter the same email address
+              used when the exercise was started.
+            </p>
+            <form id="resume-form" class="form-stack">
+              <label>
+                Email
+                <input type="email" name="email" autocomplete="email" required />
+              </label>
+              <button type="submit" class="secondary">Resume</button>
+              <p class="error" id="resume-error" hidden>No local record exists for that email.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="instructions-screen" hidden>
+        <div class="section-head">
+          <div class="instructions-lead">
+            <h2>Instructions</h2>
+            <p>
+              You are about to be presented with 500 Steam discussion posts published before the
+              named game was released. Your task is not to decide directly whether a post is PRUS.
+              Instead, you will record the observable components from which PRUS can be determined.
+            </p>
+          </div>
+          <button type="button" class="secondary" id="back-home">Back</button>
+        </div>
+
+        <div class="definition-block">
+          <h3>What is PRUS?</h3>
+          <p>
+            Pre-Release User Speculation (PRUS) is the user-to-user expression and exchange of
+            low-commitment conjectural propositions about an unreleased product, produced under
+            conditions, and in service of making sense, of incomplete product information.
+          </p>
+        </div>
+
+        <div class="definition-block compact">
+          <h3>Simply put:</h3>
+          <p>
+            PRUS occurs when a user expresses uncertainty about an idea concerning an unreleased
+            game or the experience surrounding it. In this exercise, that idea is identified through
+            three components rather than through a direct PRUS judgement.
+          </p>
+        </div>
+
+        <div class="callout">
+          <h3>How to Code Each Post:</h3>
+          <p>
+            Read the title and full displayed post as one connected contribution. First identify
+            whether the post expresses uncertainty. If it does, identify whether that uncertainty
+            applies to a recoverable claim, explanation, prediction, interpretation, theory,
+            hypothetical, or unresolved alternative. If both components are present, select every
+            product topic domain covered by the uncertain idea. One sentence may supply all the
+            components, or nearby statements may work together.
+          </p>
+        </div>
+
+        <section class="boundary-guide core-test" aria-labelledby="core-test-heading">
+          <div class="boundary-guide-head">
+            <h3 id="core-test-heading">THE THREE COMPONENTS</h3>
+            <p>Code the components in this order. The site will derive PRUS afterward.</p>
+          </div>
+          <div class="boundary-row numbered-row">
+            <p class="step-number">1</p>
+            <div>
+              <p><strong>Uncertainty cue or framing</strong></p>
+              <p>
+                Does the post contain wording or framing that presents something as possible,
+                tentative, inferred, hypothetical, unresolved, unverified, assumed, guessed, or not
+                fully certain?
+              </p>
+            </div>
+          </div>
+          <div class="boundary-row numbered-row">
+            <p class="step-number">2</p>
+            <div>
+              <p><strong>Uncertain proposition</strong></p>
+              <p>
+                Does that uncertainty apply to an identifiable claim, explanation, prediction,
+                interpretation, theory, hypothetical, or unresolved alternative? The uncertainty
+                cannot exist in isolation; it must be uncertainty about something.
+              </p>
+            </div>
+          </div>
+          <div class="boundary-row numbered-row">
+            <p class="step-number">3</p>
+            <div>
+              <p><strong>Product topic domain</strong></p>
+              <p>
+                Is the uncertain proposition about the game’s content, performance, or
+                requirements/access? Select every applicable domain.
+              </p>
+            </div>
+          </div>
+          <div class="boundary-guide-note">
+            <p>
+              A post is derived as containing PRUS only when all three components are present. The
+              pre-release and user-to-user conditions are already fixed by the sample and therefore
+              are not separate coding decisions.
+            </p>
+          </div>
+        </section>
+
+        <section class="instruction-section examples-section" aria-labelledby="examples-heading">
+          <div class="instruction-section-head">
+            <p class="section-kicker">Examples</p>
+            <h2 id="examples-heading">MOST COMMON EXAMPLE TYPES</h2>
+            <p>
+              The following examples show how the three components apply to common forms of
+              pre-release discussion. The labels show the coding sequence rather than asking for a
+              direct PRUS decision.
+            </p>
+          </div>
+
+          <section class="boundary-guide" aria-labelledby="statement-guide-heading">
+            <div class="boundary-guide-head">
+              <p class="example-family-number">Example type 1</p>
+              <h3 id="statement-guide-heading">Claims, explanations, predictions, and interpretations</h3>
+              <p>
+                These cases show the difference between an uncertain proposition and the same subject
+                matter stated as a firm fact or opinion.
+              </p>
+            </div>
+            <div class="boundary-row">
+              <p class="boundary-label component-label complete-components">1 YES · 2 YES · CONTENT</p>
+              <div>
+                <p><strong>A possible explanation for something shown before release.</strong></p>
+                <p class="example">“The locked building probably becomes a player base later.”</p>
+              </div>
+            </div>
+            <div class="boundary-row">
+              <p class="boundary-label component-label complete-components">1 YES · 2 YES · CONTENT</p>
+              <div>
+                <p><strong>A prediction presented with reduced certainty.</strong></p>
+                <p class="example">“With a map that large, matches might take longer than the trailer suggests.”</p>
+              </div>
+            </div>
+            <div class="boundary-row">
+              <p class="boundary-label component-label complete-components">1 YES · 2 YES · CONTENT</p>
+              <div>
+                <p><strong>An interpretation that leaves alternatives unresolved.</strong></p>
+                <p class="example">“Either the final game has another region, or that rail line is only decorative.”</p>
+              </div>
+            </div>
+            <div class="boundary-row">
+              <p class="boundary-label component-label stopped-components">1 NO · STOP</p>
+              <div>
+                <p><strong>A future fact stated without uncertainty.</strong></p>
+                <p class="example">“The game launches next Friday.”</p>
+              </div>
+            </div>
+            <div class="boundary-row">
+              <p class="boundary-label component-label stopped-components">1 NO · STOP</p>
+              <div>
+                <p><strong>A direct opinion that does not advance an uncertain idea.</strong></p>
+                <p class="example">“The combat shown in the trailer looks boring.”</p>
+              </div>
+            </div>
+          </section>
+
+        <section class="boundary-guide" aria-labelledby="question-guide-heading">
+          <div class="boundary-guide-head">
+            <p class="example-family-number">Example type 2</p>
+            <h3 id="question-guide-heading">Questions, requests, hopes, and suggestions</h3>
+            <p>
+              These forms can express uncertainty about a proposition, but their grammatical form
+              alone does not satisfy either component.
+            </p>
+          </div>
+          <div class="boundary-row">
+            <p class="boundary-label component-label complete-components">1 YES · 2 YES · CONTENT</p>
+            <div>
+              <p><strong>A question that directly raises a possible product state.</strong></p>
+              <p class="example">“Could the locked area be another map in the full game?”</p>
+            </div>
+          </div>
+          <div class="boundary-row">
+            <p class="boundary-label component-label complete-components">1 YES · 2 YES · CONTENT</p>
+            <div>
+              <p><strong>A question that is phrased as a request but advances an explanation.</strong></p>
+              <p class="example">“Why show three empty class slots unless more classes are planned?”</p>
+            </div>
+          </div>
+          <div class="boundary-row">
+            <p class="boundary-label component-label complete-components">1 YES · 2 YES · CONTENT</p>
+            <div>
+              <p><strong>A hope that also introduces an uncertain product possibility.</strong></p>
+              <p class="example">“I hope the empty slot means another class is coming at launch.”</p>
+            </div>
+          </div>
+          <div class="boundary-row">
+            <p class="boundary-label component-label complete-components">1 YES · 2 YES · PERFORMANCE</p>
+            <div>
+              <p><strong>A suggestion that includes an uncertain consequence.</strong></p>
+              <p class="example">“They should improve the servers because they may struggle with the launch crowd.”</p>
+            </div>
+          </div>
+          <div class="boundary-row">
+            <p class="boundary-label component-label stopped-components">1 NO · STOP</p>
+            <div>
+              <p><strong>A question seeking only a currently available fact or fix.</strong></p>
+              <p class="example">“My controller isn’t working. Which setting fixes it?”</p>
+            </div>
+          </div>
+          <div class="boundary-row">
+            <p class="boundary-label component-label stopped-components">1 NO · STOP</p>
+            <div>
+              <p><strong>A pure request or preference without an uncertain product idea.</strong></p>
+              <p class="example">“Please add split-screen.”</p>
+            </div>
+          </div>
+          <div class="boundary-row">
+            <p class="boundary-label component-label stopped-components">1 NO · STOP</p>
+            <div>
+              <p><strong>A question that asks only for a currently knowable release detail.</strong></p>
+              <p class="example">“Which edition includes early access?”</p>
+            </div>
+          </div>
+          <div class="boundary-guide-note">
+            <p>
+              Code the uncertainty framing and the proposition, not the question mark, request, hope,
+              or suggestion by itself. A question seeking only a fact, instruction, or immediate fix
+              does not automatically provide either component.
+            </p>
+          </div>
+        </section>
+
+        <section class="boundary-guide" aria-labelledby="prerelease-build-guide-heading">
+          <div class="boundary-guide-head">
+            <p class="example-family-number">Example type 3</p>
+            <h3 id="prerelease-build-guide-heading">Demos, betas, and Early Access</h3>
+            <p>
+              Current experiences with a pre-release build can supply evidence for an uncertain
+              interpretation of the wider product. A bare report of what happened is not enough.
+            </p>
+          </div>
+          <div class="boundary-row">
+            <p class="boundary-label component-label complete-components">1 YES · 2 YES · PERFORMANCE</p>
+            <div>
+              <p><strong>A current experience used to infer a possible release-state problem.</strong></p>
+              <p class="example">“The demo keeps crashing, so the launch build may have the same issue.”</p>
+            </div>
+          </div>
+          <div class="boundary-row">
+            <p class="boundary-label component-label complete-components">1 YES · 2 YES · CONTENT</p>
+            <div>
+              <p><strong>A current experience that raises a possibility about the wider game.</strong></p>
+              <p class="example">“The combat feels limited in the demo. Is this all there will be?”</p>
+            </div>
+          </div>
+          <div class="boundary-row">
+            <p class="boundary-label component-label complete-components">1 YES · 2 YES · PERFORMANCE</p>
+            <div>
+              <p><strong>A concern about how a pre-release problem may develop.</strong></p>
+              <p class="example">“The beta performance is rough. I’m not sure they can fix it before launch.”</p>
+            </div>
+          </div>
+          <div class="boundary-row">
+            <p class="boundary-label component-label stopped-components">1 NO · STOP</p>
+            <div>
+              <p><strong>A direct report of the current build without an uncertain interpretation.</strong></p>
+              <p class="example">“The demo crashed twice today.”</p>
+            </div>
+          </div>
+          <div class="boundary-row">
+            <p class="boundary-label component-label stopped-components">1 NO · STOP</p>
+            <div>
+              <p><strong>A resolved technical problem.</strong></p>
+              <p class="example">“The demo crashed because my graphics driver was outdated. Updating it fixed the problem.”</p>
+            </div>
+          </div>
+          <div class="boundary-guide-note">
+            <p>
+              A pre-release problem supplies the components when it is used to raise or imply an
+              unresolved proposition about the game or product experience. A current-state report
+              that stops at what happened, or explains and resolves the problem, does not.
+            </p>
+          </div>
+        </section>
+        </section>
+
+        <section class="boundary-guide" aria-labelledby="exclusions-heading">
+          <div class="boundary-guide-head">
+            <h3 id="exclusions-heading">Component-coding boundaries</h3>
+          </div>
+          <ul class="exclusion-list">
+            <li>A direct factual claim, even about the future, does not provide an uncertainty cue.</li>
+            <li>Ordinary excitement, dislike, praise, criticism, sarcasm, or negation does not provide an uncertainty cue by itself.</li>
+            <li>Advice, obligation, permission, or ability is not uncertainty unless it also reduces commitment to a proposition.</li>
+            <li>“I’m not sure” supplies uncertainty, but without an identifiable uncertain idea it does not supply Component 2.</li>
+            <li>A fact-seeking or troubleshooting question does not automatically supply an uncertain proposition.</li>
+            <li>Resolved technical explanations and unrelated discussion do not satisfy the component sequence.</li>
+          </ul>
+        </section>
+
+        <section class="instruction-section domain-section" aria-labelledby="domains-heading">
+          <div class="instruction-section-head">
+            <p class="section-kicker">Classification</p>
+            <h2 id="domains-heading">PRODUCT TOPIC DOMAINS</h2>
+            <p>
+              After identifying both uncertainty and an uncertain proposition, select every product
+              topic domain covered by that proposition. A single post may involve more than one.
+            </p>
+          </div>
+          <div class="domain-grid">
+            <article>
+              <h3>Content</h3>
+              <p>Speculation about story, mechanics, characters, modes, maps, features, monetization, or gameplay experience.</p>
+              <p class="example">Example: "The demo probably hints at a bigger crafting system."</p>
+            </article>
+            <article>
+              <h3>Performance</h3>
+              <p>Speculation about technical quality, optimization, FPS, bugs, crashes, servers, or launch stability.</p>
+              <p class="example">Example: "It might run badly on older GPUs at launch."</p>
+            </article>
+            <article>
+              <h3>Requirements / Access</h3>
+              <p>Speculation about platform access, hardware specs, storage, regions, editions, release timing, or play conditions.</p>
+              <p class="example">Example: "The full version may need more RAM than the demo."</p>
+            </article>
+          </div>
+        </section>
+
+        <button type="button" class="primary wide" id="start-exercise">Start Coding</button>
+      </section>
+
+      <section class="panel exercise" id="exercise-screen" hidden>
+        <div class="progress-row">
+          <div>
+            <p class="eyebrow">Post <span id="position-label">1</span> of <span id="total-label">500</span></p>
+            <h2 id="game-label">Game</h2>
+            <p class="muted" id="release-timing-label"></p>
+          </div>
+          <div class="progress-meter" aria-label="Progress">
+            <div id="progress-bar"></div>
+          </div>
+        </div>
+
+        <div class="sticky-definition" id="step-reminder">
+          <strong id="step-reminder-title">Step 1 · Uncertainty</strong>
+          <span id="step-reminder-text">
+            Identify uncertainty first. Do not make a direct PRUS judgment; the site derives PRUS
+            from the three component decisions.
+          </span>
+        </div>
+
+        <article class="post-card">
+          <p class="eyebrow">Steam discussion post</p>
+          <h3 id="post-title"></h3>
+          <p id="post-body"></p>
+        </article>
+
+        <section class="component-step" id="cue-decision">
+          <p class="eyebrow">Component 1 of 3</p>
+          <h3>Does this post express uncertainty?</h3>
+          <p class="muted">
+            Look for wording or framing that presents something as possible, tentative, inferred,
+            hypothetical, unresolved, unverified, assumed, guessed, or not fully certain.
+          </p>
+          <div class="decision-row">
+            <button type="button" class="primary decision" data-cue="true">Yes, uncertainty is present</button>
+            <button type="button" class="secondary decision" data-cue="false">No uncertainty</button>
+          </div>
+        </section>
+
+        <section class="component-step" id="proposition-decision" hidden>
+          <p class="eyebrow">Component 2 of 3</p>
+          <h3>Is the uncertainty about an identifiable idea?</h3>
+          <p class="muted">
+            Decide whether the uncertainty applies to a claim, explanation, prediction,
+            interpretation, theory, hypothetical, or unresolved alternative. Uncertainty cannot
+            stand alone; it must be uncertainty about something.
+          </p>
+          <div class="decision-row">
+            <button type="button" class="primary decision" data-proposition="true">Yes, an uncertain idea is present</button>
+            <button type="button" class="secondary decision" data-proposition="false">No identifiable uncertain idea</button>
+          </div>
+          <button type="button" class="link-button restart-component-coding">Change Step 1 answer</button>
+        </section>
+
+        <section class="domain-choice component-step" id="domain-choice" hidden>
+          <p class="eyebrow">Component 3 of 3</p>
+          <h3>Which product topic domain does the uncertain idea concern?</h3>
+          <p class="muted">Select every applicable domain. At least one is required before continuing.</p>
+          <div class="decision-row">
+            <button type="button" class="domain-button" data-domain="content" aria-pressed="false">Content</button>
+            <button type="button" class="domain-button" data-domain="performance" aria-pressed="false">Performance</button>
+            <button type="button" class="domain-button" data-domain="requirements_access" aria-pressed="false">Requirements / Access</button>
+          </div>
+          <button type="button" class="primary domain-continue" id="confirm-domains" disabled>Continue</button>
+          <div class="component-nav-links">
+            <button type="button" class="link-button" id="back-to-proposition">Change Step 2 answer</button>
+            <button type="button" class="link-button restart-component-coding">Restart at Step 1</button>
+          </div>
+        </section>
+
+        <div class="nav-row">
+          <button type="button" class="secondary" id="previous">Previous</button>
+          <button type="button" class="secondary" id="save-exit">Save and Exit</button>
+        </div>
+        <p class="save-message" id="exercise-save-message" aria-live="polite"></p>
+      </section>
+
+      <section class="panel" id="finished-screen" hidden>
+        <p class="eyebrow">Complete</p>
+        <h2>Validation Session Complete</h2>
+        <p class="save-message" id="remote-save-message" aria-live="polite">
+          Saving the completed responses to the research repository…
+        </p>
+        <button type="button" class="secondary" id="retry-remote-save" hidden>Retry Secure Save</button>
+        <p class="muted">CSV and JSON downloads remain available as personal backup copies.</p>
+        <div class="decision-row">
+          <button type="button" class="primary" id="download-csv">Download CSV</button>
+          <button type="button" class="secondary" id="download-json">Download JSON</button>
+        </div>
+        <button type="button" class="link-button" id="return-home">Return to Start</button>
+      </section>
+    </main>
+
+    <script src="config.js?v=20260718-component-v1"></script>
+    <script src="app.js?v=20260718-component-v1"></script>
+  </body>
+</html>
