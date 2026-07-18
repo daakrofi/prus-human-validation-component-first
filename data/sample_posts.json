@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "sample_name": "PRUS post-level component-first human-validation sample",
-    "sample_version": "2026-07-18-component-first-v1",
+    "sample_name": "PRUS post-level component-first human-validation sample — revised domain gate",
+    "sample_version": "2026-07-18-component-first-v2",
     "unit_of_validation": "topic_root_post",
-    "annotation_scheme": "component_first_cue_proposition_domain",
+    "annotation_scheme": "component_first_cue_proposition_domain_none_v2",
     "target_total": 500,
     "pre_release_window": {
       "minimum_day": -60,

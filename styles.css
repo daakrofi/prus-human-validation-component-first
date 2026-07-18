@@ -534,11 +534,31 @@ button:disabled {
   min-height: 52px;
 }
 
+.no-domain-button {
+  width: 100%;
+  margin-top: 12px;
+  color: #5f3c3c;
+  background: #fff8f7;
+  border-color: #d9b8b5;
+}
+
 .domain-button.selected,
 .domain-button[aria-pressed="true"] {
   color: #fff;
   background: var(--accent);
   border-color: var(--accent);
+}
+
+.no-domain-button.selected,
+.no-domain-button[aria-pressed="true"] {
+  color: #fff;
+  background: #754845;
+  border-color: #754845;
+}
+
+.no-domain-button.selected:hover,
+.no-domain-button[aria-pressed="true"]:hover {
+  background: #613b38;
 }
 
 .domain-button.selected:hover,

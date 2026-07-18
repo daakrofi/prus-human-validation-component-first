@@ -1,6 +1,6 @@
-const STORAGE_PREFIX = "prus-post-validation-component-first-v1";
-const SAMPLE_VERSION = "2026-07-18-component-first-v1";
-const DATA_PATH = "data/sample_posts.json?v=20260718-component-v1";
+const STORAGE_PREFIX = "prus-post-validation-component-first-v2";
+const SAMPLE_VERSION = "2026-07-18-component-first-v2";
+const DATA_PATH = "data/sample_posts.json?v=20260718-component-v2";
 const CONFIG = window.PRUS_VALIDATION_CONFIG || { backendUrl: "" };
 const ALLOWED_DOMAINS = ["content", "performance", "requirements_access"];
 
@@ -28,6 +28,7 @@ const els = {
   cueDecision: document.querySelector("#cue-decision"),
   propositionDecision: document.querySelector("#proposition-decision"),
   domainChoice: document.querySelector("#domain-choice"),
+  noQualifyingDomain: document.querySelector("#no-qualifying-domain"),
   confirmDomains: document.querySelector("#confirm-domains"),
   backToProposition: document.querySelector("#back-to-proposition"),
   restartComponentCoding: document.querySelectorAll(".restart-component-coding"),
@@ -106,6 +107,7 @@ function emptyResponses() {
     uncertainty_cue_present: null,
     uncertain_proposition_present: null,
     human_domains: [],
+    no_qualifying_domain: null,
     derived_PRUS: null,
     answered_at: null
   }));
@@ -114,7 +116,7 @@ function emptyResponses() {
 function createSession(person) {
   const now = new Date().toISOString();
   return {
-    version: 3,
+    version: 4,
     validation_unit: "topic_root_post",
     participant_email: person.email,
     started_at: now,
@@ -129,15 +131,17 @@ function responseComplete(response) {
   if (response.uncertainty_cue_present === false) return true;
   if (response.uncertainty_cue_present !== true) return false;
   if (response.uncertain_proposition_present === false) return true;
-  return response.uncertain_proposition_present === true
-    && Array.isArray(response.human_domains)
-    && response.human_domains.length > 0;
+  if (response.uncertain_proposition_present !== true) return false;
+  const hasDomain = Array.isArray(response.human_domains) && response.human_domains.length > 0;
+  const hasNoDomain = response.no_qualifying_domain === true;
+  return hasDomain !== hasNoDomain;
 }
 
 function derivePrus(response) {
   if (!responseComplete(response)) return null;
   return response.uncertainty_cue_present === true
     && response.uncertain_proposition_present === true
+    && response.no_qualifying_domain !== true
     && response.human_domains.length > 0;
 }
 
@@ -164,7 +168,7 @@ async function postRemoteProgress(saveReason) {
         ...dataset.metadata,
         sample_version: SAMPLE_VERSION,
         unit_of_validation: "topic_root_post",
-        annotation_scheme: "component_first_cue_proposition_domain"
+        annotation_scheme: "component_first_cue_proposition_domain_none_v2"
       };
       response = await fetch(CONFIG.backendUrl, {
         method: "POST",
@@ -271,7 +275,10 @@ function syncDomainButtons(response) {
     button.classList.toggle("selected", active);
     button.setAttribute("aria-pressed", String(active));
   });
-  els.confirmDomains.disabled = selected.size === 0;
+  const noDomain = response.no_qualifying_domain === true;
+  els.noQualifyingDomain.classList.toggle("selected", noDomain);
+  els.noQualifyingDomain.setAttribute("aria-pressed", String(noDomain));
+  els.confirmDomains.disabled = selected.size === 0 && !noDomain;
 }
 
 function responseStage(response) {
@@ -288,13 +295,13 @@ function showResponseStage(response) {
 
   if (stage === "cue") {
     els.stepReminderTitle.textContent = "Step 1 · Uncertainty";
-    els.stepReminderText.textContent = "Identify uncertainty first. Do not make a direct PRUS judgment; the site derives PRUS from the three component decisions.";
+    els.stepReminderText.textContent = "Identify uncertainty framing, not punctuation alone. Questions do not automatically count; implied possibilities, hopes, suggestions, assumptions, and conditionals can.";
   } else if (stage === "proposition") {
     els.stepReminderTitle.textContent = "Step 2 · Uncertain proposition";
     els.stepReminderText.textContent = "Identify what the uncertainty applies to: a claim, explanation, prediction, interpretation, theory, hypothetical, or unresolved alternative.";
   } else {
     els.stepReminderTitle.textContent = "Step 3 · Product topic domain";
-    els.stepReminderText.textContent = "Select every product topic domain covered by the uncertain idea. The completed component sequence will be derived as PRUS.";
+    els.stepReminderText.textContent = "Select every qualifying product topic domain, or explicitly record that the uncertain idea concerns none of them.";
   }
 }
 
@@ -330,6 +337,7 @@ function answerCue(present) {
     uncertainty_cue_present: present,
     uncertain_proposition_present: null,
     human_domains: [],
+    no_qualifying_domain: null,
     derived_PRUS: present ? null : false,
     answered_at: completedAt
   };
@@ -348,6 +356,7 @@ function answerProposition(present) {
     uncertainty_cue_present: true,
     uncertain_proposition_present: present,
     human_domains: [],
+    no_qualifying_domain: null,
     derived_PRUS: present ? null : false,
     answered_at: completedAt
   };
@@ -371,6 +380,20 @@ function toggleDomain(domain) {
   response.uncertainty_cue_present = true;
   response.uncertain_proposition_present = true;
   response.human_domains = ALLOWED_DOMAINS.filter((value) => selected.has(value));
+  response.no_qualifying_domain = false;
+  response.derived_PRUS = null;
+  response.answered_at = null;
+  persistLocalSession();
+  syncDomainButtons(response);
+}
+
+function toggleNoQualifyingDomain() {
+  const response = session.responses[currentIndex];
+  const active = response.no_qualifying_domain === true;
+  response.uncertainty_cue_present = true;
+  response.uncertain_proposition_present = true;
+  response.human_domains = [];
+  response.no_qualifying_domain = active ? false : true;
   response.derived_PRUS = null;
   response.answered_at = null;
   persistLocalSession();
@@ -379,10 +402,12 @@ function toggleDomain(domain) {
 
 function confirmDomains() {
   const response = session.responses[currentIndex];
-  if (!Array.isArray(response.human_domains) || response.human_domains.length === 0) return;
+  const hasDomain = Array.isArray(response.human_domains) && response.human_domains.length > 0;
+  const hasNoDomain = response.no_qualifying_domain === true;
+  if (hasDomain === hasNoDomain) return;
   response.uncertainty_cue_present = true;
   response.uncertain_proposition_present = true;
-  response.derived_PRUS = true;
+  response.derived_PRUS = hasDomain;
   response.answered_at = new Date().toISOString();
   advance();
 }
@@ -393,6 +418,7 @@ function restartComponentCoding() {
     uncertainty_cue_present: null,
     uncertain_proposition_present: null,
     human_domains: [],
+    no_qualifying_domain: null,
     derived_PRUS: null,
     answered_at: null
   };
@@ -406,6 +432,7 @@ function backToProposition() {
     uncertainty_cue_present: true,
     uncertain_proposition_present: null,
     human_domains: [],
+    no_qualifying_domain: null,
     derived_PRUS: null,
     answered_at: null
   };
@@ -486,6 +513,7 @@ function mergedRows() {
       uncertainty_cue_present: response.uncertainty_cue_present,
       uncertain_proposition_present: response.uncertain_proposition_present,
       human_domains: (response.human_domains || []).join("|"),
+      no_qualifying_domain: response.no_qualifying_domain,
       derived_PRUS: derivePrus(response),
       answered_at: response.answered_at
     };
@@ -520,7 +548,7 @@ function downloadCsv() {
     headers.join(","),
     ...rows.map((row) => headers.map((header) => csvEscape(row[header])).join(","))
   ].join("\n");
-  download(`prus_component_validation_${normalizeEmail(participant.email)}.csv`, csv, "text/csv;charset=utf-8");
+  download(`prus_component_validation_v2_${normalizeEmail(participant.email)}.csv`, csv, "text/csv;charset=utf-8");
 }
 
 function downloadJson() {
@@ -531,7 +559,7 @@ function downloadJson() {
     rows: mergedRows()
   };
   download(
-    `prus_component_validation_${normalizeEmail(participant.email)}.json`,
+    `prus_component_validation_v2_${normalizeEmail(participant.email)}.json`,
     JSON.stringify(payload, null, 2),
     "application/json;charset=utf-8"
   );
@@ -596,6 +624,7 @@ els.domainChoice.addEventListener("click", (event) => {
   toggleDomain(button.dataset.domain);
 });
 
+els.noQualifyingDomain.addEventListener("click", toggleNoQualifyingDomain);
 els.confirmDomains.addEventListener("click", confirmDomains);
 els.backToProposition.addEventListener("click", backToProposition);
 els.restartComponentCoding.forEach((button) => button.addEventListener("click", restartComponentCoding));

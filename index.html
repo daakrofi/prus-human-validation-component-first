@@ -105,8 +105,9 @@
             whether the post expresses uncertainty. If it does, identify whether that uncertainty
             applies to a recoverable claim, explanation, prediction, interpretation, theory,
             hypothetical, or unresolved alternative. If both components are present, select every
-            product topic domain covered by the uncertain idea. One sentence may supply all the
-            components, or nearby statements may work together.
+            product topic domain covered by the uncertain idea, or select <strong>No qualifying
+            product topic domain</strong>. One sentence may supply all the components, or nearby
+            statements may work together.
           </p>
         </div>
 
@@ -122,7 +123,9 @@
               <p>
                 Does the post contain wording or framing that presents something as possible,
                 tentative, inferred, hypothetical, unresolved, unverified, assumed, guessed, or not
-                fully certain?
+                fully certain? A question mark is not automatically an uncertainty cue. Hopes,
+                suggestions, assumptions, conditionals, and implied possibilities can provide
+                uncertainty framing even without words such as “may” or “might.”
               </p>
             </div>
           </div>
@@ -143,7 +146,8 @@
               <p><strong>Product topic domain</strong></p>
               <p>
                 Is the uncertain proposition about the game’s content, performance, or
-                requirements/access? Select every applicable domain.
+                requirements/access? Select every applicable domain. If it concerns none of them,
+                record that explicitly rather than forcing a domain.
               </p>
             </div>
           </div>
@@ -211,6 +215,13 @@
                 <p class="example">“The combat shown in the trailer looks boring.”</p>
               </div>
             </div>
+            <div class="boundary-row">
+              <p class="boundary-label component-label stopped-components">1 YES · 2 YES · NO DOMAIN</p>
+              <div>
+                <p><strong>An uncertain idea that is not about a qualifying product topic domain.</strong></p>
+                <p class="example">“The studio manager might be tired after answering all these forum posts.”</p>
+              </div>
+            </div>
           </section>
 
         <section class="boundary-guide" aria-labelledby="question-guide-heading">
@@ -219,7 +230,8 @@
             <h3 id="question-guide-heading">Questions, requests, hopes, and suggestions</h3>
             <p>
               These forms can express uncertainty about a proposition, but their grammatical form
-              alone does not satisfy either component.
+              alone does not satisfy either component. A question counts only when it raises or
+              implies an unresolved possibility about the product or the wider product experience.
             </p>
           </div>
           <div class="boundary-row">
@@ -274,8 +286,11 @@
           <div class="boundary-guide-note">
             <p>
               Code the uncertainty framing and the proposition, not the question mark, request, hope,
-              or suggestion by itself. A question seeking only a fact, instruction, or immediate fix
-              does not automatically provide either component.
+              or suggestion by itself. A question seeking only a currently available fact,
+              instruction, or immediate fix does not provide uncertainty framing merely because the
+              answer is unknown to the writer. By contrast, a hope, suggestion, assumption, or
+              conditional can provide uncertainty framing when it introduces or implies a possible
+              product state or outcome.
             </p>
           </div>
         </section>
@@ -343,7 +358,8 @@
             <li>Ordinary excitement, dislike, praise, criticism, sarcasm, or negation does not provide an uncertainty cue by itself.</li>
             <li>Advice, obligation, permission, or ability is not uncertainty unless it also reduces commitment to a proposition.</li>
             <li>“I’m not sure” supplies uncertainty, but without an identifiable uncertain idea it does not supply Component 2.</li>
-            <li>A fact-seeking or troubleshooting question does not automatically supply an uncertain proposition.</li>
+            <li>A question mark does not automatically supply uncertainty. A fact-seeking or troubleshooting question is coded No unless it raises a wider unresolved possibility about the product or product experience.</li>
+            <li>Hopes, suggestions, assumptions, and conditional statements can supply uncertainty framing when they introduce or imply a possible product state, even without an explicit modal cue.</li>
             <li>Resolved technical explanations and unrelated discussion do not satisfy the component sequence.</li>
           </ul>
         </section>
@@ -354,7 +370,9 @@
             <h2 id="domains-heading">PRODUCT TOPIC DOMAINS</h2>
             <p>
               After identifying both uncertainty and an uncertain proposition, select every product
-              topic domain covered by that proposition. A single post may involve more than one.
+              topic domain covered by that proposition. A single post may involve more than one. If
+              the uncertain proposition concerns none of the three domains, select <strong>No
+              qualifying product topic domain</strong>.
             </p>
           </div>
           <div class="domain-grid">
@@ -410,7 +428,9 @@
           <h3>Does this post express uncertainty?</h3>
           <p class="muted">
             Look for wording or framing that presents something as possible, tentative, inferred,
-            hypothetical, unresolved, unverified, assumed, guessed, or not fully certain.
+            hypothetical, unresolved, unverified, assumed, guessed, or not fully certain. A question
+            mark alone is not enough. Hopes, suggestions, assumptions, conditionals, and implied
+            possibilities can count even without “may” or “might.”
           </p>
           <div class="decision-row">
             <button type="button" class="primary decision" data-cue="true">Yes, uncertainty is present</button>
@@ -436,12 +456,18 @@
         <section class="domain-choice component-step" id="domain-choice" hidden>
           <p class="eyebrow">Component 3 of 3</p>
           <h3>Which product topic domain does the uncertain idea concern?</h3>
-          <p class="muted">Select every applicable domain. At least one is required before continuing.</p>
+          <p class="muted">
+            Select every applicable domain, or select No qualifying product topic domain. Do not
+            force an uncertain idea into a domain it does not concern.
+          </p>
           <div class="decision-row">
             <button type="button" class="domain-button" data-domain="content" aria-pressed="false">Content</button>
             <button type="button" class="domain-button" data-domain="performance" aria-pressed="false">Performance</button>
             <button type="button" class="domain-button" data-domain="requirements_access" aria-pressed="false">Requirements / Access</button>
           </div>
+          <button type="button" class="domain-button no-domain-button" id="no-qualifying-domain" aria-pressed="false">
+            No qualifying product topic domain
+          </button>
           <button type="button" class="primary domain-continue" id="confirm-domains" disabled>Continue</button>
           <div class="component-nav-links">
             <button type="button" class="link-button" id="back-to-proposition">Change Step 2 answer</button>
@@ -472,7 +498,7 @@
       </section>
     </main>
 
-    <script src="config.js?v=20260718-component-v1"></script>
-    <script src="app.js?v=20260718-component-v1"></script>
+    <script src="config.js?v=20260718-component-v2"></script>
+    <script src="app.js?v=20260718-component-v2"></script>
   </body>
 </html>
