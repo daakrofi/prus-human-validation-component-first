@@ -1,6 +1,6 @@
-const STORAGE_PREFIX = "prus-post-validation-component-first-v2";
-const SAMPLE_VERSION = "2026-07-18-component-first-v2";
-const DATA_PATH = "data/sample_posts.json?v=20260718-component-v2";
+const STORAGE_PREFIX = "prus-post-validation-component-first-v3";
+const SAMPLE_VERSION = "2026-07-20-component-first-v3";
+const DATA_PATH = "data/sample_posts.json?v=20260720-component-v3";
 const CONFIG = window.PRUS_VALIDATION_CONFIG || { backendUrl: "" };
 const ALLOWED_DOMAINS = ["content", "performance", "requirements_access"];
 
@@ -168,7 +168,7 @@ async function postRemoteProgress(saveReason) {
         ...dataset.metadata,
         sample_version: SAMPLE_VERSION,
         unit_of_validation: "topic_root_post",
-        annotation_scheme: "component_first_cue_proposition_domain_none_v2"
+        annotation_scheme: "component_first_cue_proposition_domain_none_question_test_v3"
       };
       response = await fetch(CONFIG.backendUrl, {
         method: "POST",
@@ -295,7 +295,7 @@ function showResponseStage(response) {
 
   if (stage === "cue") {
     els.stepReminderTitle.textContent = "Step 1 · Uncertainty";
-    els.stepReminderText.textContent = "Identify uncertainty framing, not punctuation alone. Questions do not automatically count; implied possibilities, hopes, suggestions, assumptions, and conditionals can.";
+    els.stepReminderText.textContent = "For a question, disregard its question form. Select Yes only when the post advances or endorses a possible answer, explanation, prediction, interpretation, or future product state.";
   } else if (stage === "proposition") {
     els.stepReminderTitle.textContent = "Step 2 · Uncertain proposition";
     els.stepReminderText.textContent = "Identify what the uncertainty applies to: a claim, explanation, prediction, interpretation, theory, hypothetical, or unresolved alternative.";
@@ -548,7 +548,7 @@ function downloadCsv() {
     headers.join(","),
     ...rows.map((row) => headers.map((header) => csvEscape(row[header])).join(","))
   ].join("\n");
-  download(`prus_component_validation_v2_${normalizeEmail(participant.email)}.csv`, csv, "text/csv;charset=utf-8");
+  download(`prus_component_validation_v3_${normalizeEmail(participant.email)}.csv`, csv, "text/csv;charset=utf-8");
 }
 
 function downloadJson() {
@@ -559,7 +559,7 @@ function downloadJson() {
     rows: mergedRows()
   };
   download(
-    `prus_component_validation_v2_${normalizeEmail(participant.email)}.json`,
+    `prus_component_validation_v3_${normalizeEmail(participant.email)}.json`,
     JSON.stringify(payload, null, 2),
     "application/json;charset=utf-8"
   );
